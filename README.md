@@ -1,0 +1,1 @@
+This is the Flask server for my bus schedule application

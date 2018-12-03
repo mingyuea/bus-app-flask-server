@@ -1,0 +1,10 @@
+Include/
+Lib/
+Scripts/
+tcl/
+var/
+
+pip-selfcheck.json
+application/__pycache__/
+
+.ebextenstions/
