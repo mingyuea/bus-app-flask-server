@@ -8,3 +8,7 @@ pip-selfcheck.json
 application/__pycache__/
 
 .ebextenstions/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

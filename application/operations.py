@@ -2,6 +2,8 @@ from flask import (Blueprint, request, current_app)
 from application.cors_response import cors_res
 import pickle
 from datetime import datetime
+from application.stopDict import masterStopDict
+from application.stopLocation import stopArr
 from pytz import timezone
 
 bp = Blueprint('operations', __name__, url_prefix='/operations')
@@ -10,9 +12,10 @@ bp = Blueprint('operations', __name__, url_prefix='/operations')
 @bp.route('/getStops', methods=('GET',))
 def getStops():
 	stopObj = {}
-	with current_app.open_resource('stopLocation.pkl', mode='rb') as f:
+	'''with current_app.open_resource('stopLocation.pkl', mode='rb') as f:
 		stopArr = pickle.load(f)
-		stopObj['stopArr'] = stopArr
+		stopObj['stopArr'] = stopArr'''
+	stopObj['stopArr'] = stopArr
 	return cors_res(stopObj)
 
 
@@ -24,8 +27,10 @@ def locationUpdate():
 		reqDict = request.get_json()
 		stopID = str(reqDict['stopID'])
 
-		with current_app.open_resource('stops/'+stopID+'.pkl', mode='rb') as f:
-			timeArr = pickle.load(f)
+		'''with current_app.open_resource('stops/'+stopID+'.pkl', mode='rb') as f:
+			timeArr = pickle.load(f)'''
+
+		timeArr = masterStopDict[stopID]
 		tz = timezone('EST')
 		timestamp = datetime.now(tz)
 		convertTime = float(timestamp.hour) + round(int(timestamp.minute)/60, 3)
